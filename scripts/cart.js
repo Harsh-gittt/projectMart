@@ -1,4 +1,4 @@
-import { cart , removeFromCart , updateCartQuantity} from "./cart-data.js";
+import { cart , removeFromCart , updateCartQuantity , updateToNewQuantity} from "./cart-data.js";
 import { products } from "./products.js";
 
 generateCartItems();
@@ -34,12 +34,14 @@ function generateCartItems () {
                             </div>
     
                             <div class="cart-product-actions">
-                                <div class="cart-product-quantity">
+                                <div class="cart-product-quantity quantity-for-${cartItem.productId}">
                                     Quantity : ${cartItem.quantity}
                                 </div>
-                                <div class="cart-product-update cart-product-feature">
+                                <div class="cart-product-update cart-product-feature" data-update-Id="${cartItem.productId}">
                                     Update
                                 </div>
+                                <input type="text" class="quantity-input value-for-${cartItem.productId}">
+                                <span class="save-quantity cart-product-feature" data-save-Id="${cartItem.productId}">Save</span>
                                 <div class="cart-product-delete cart-product-feature" data-delete-Id="${cartItem.productId}">
                                     Delete
                                 </div>
@@ -111,3 +113,30 @@ document.querySelectorAll('.cart-product-delete').forEach((button) => {
     });
 });
 
+document.querySelectorAll('.cart-product-update').forEach((button) => {
+    button.addEventListener('click', () => {
+        let productId = button.dataset.updateId;
+        let toUpdate = document.querySelector(`.product-num-${productId}`);
+        toUpdate.classList.add('is-editing-quantity');
+    });
+});
+
+document.querySelectorAll('.save-quantity').forEach((button) => {
+    button.addEventListener('click', () => {
+        let productId = button.dataset.saveId;
+        let toSave = document.querySelector(`.product-num-${productId}`);
+        let newQuantity = document.querySelector(`.value-for-${productId}`).value;
+
+        if(newQuantity > 0 && newQuantity <100){
+            toSave.classList.remove('is-editing-quantity');
+        updateToNewQuantity(productId , Number(newQuantity))
+        document.querySelector(`.quantity-for-${productId}`).innerHTML = `Quantity : ${newQuantity}`;
+        displayCartQuantity();
+        }
+
+        else{
+            alert('Invalid Quantity');
+        }
+        
+    });
+});

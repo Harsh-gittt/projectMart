@@ -50,3 +50,12 @@ export function updateCartQuantity () {
     });
     return cartQuantity;
 }
+
+export function updateToNewQuantity (productId , newQuantity) {
+    cart.forEach((cartItem) => {
+        if(productId === cartItem.productId){
+            cartItem.quantity = newQuantity;
+        }
+    });
+    saveToStorage();
+}
