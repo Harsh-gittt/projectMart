@@ -61,6 +61,14 @@ function addToCart (button) {
         )
     }
 
+    let cartQuantity = 0;
+    cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+    });
+
+    let cartIcon = document.querySelector('.cart-number');
+    cartIcon.innerHTML = cartQuantity;
+
     console.log(cart);
 }
 
