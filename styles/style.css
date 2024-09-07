@@ -25,7 +25,7 @@ html , body{
     justify-content: space-between;
     padding: 3vh 6vw;
     margin: auto;
-    /* border-bottom: 1px solid black; */
+    border-bottom: 1px solid #dadada;
     position: sticky;
     top: 0;
     background-color: white;
@@ -143,6 +143,7 @@ html , body{
     background-color: white;
     position: relative;
     transition: all 200ms ease;
+    border: 1px solid #dadada;
 }
 
 .product:hover{
@@ -158,13 +159,14 @@ html , body{
 .product-image img{
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
 }
 
 .product .product-name{
     font-size: 1vw;
     margin-bottom: 7px;
+    font-weight: 600;
 }
 
 .product .product-rating {
