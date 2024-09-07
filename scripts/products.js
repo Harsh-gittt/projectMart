@@ -1,4 +1,4 @@
-const products = [
+export const products = [
     {
         id : 'product-1',
         image : 'images/black-tshirt.webp',
