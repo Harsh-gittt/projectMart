@@ -1,5 +1,6 @@
 import { cart , removeFromCart , updateCartQuantity , updateToNewQuantity} from "./cart-data.js";
 import { products } from "./products.js";
+import { deliveryOption } from "./delivery-options.js";
 
 generateCartItems();
 displayCartQuantity();
@@ -17,9 +18,23 @@ function generateCartItems () {
             }
         });
 
+        let deliveryOptionId = cartItem.deliveryOptionId;
+
+        let selectedOption;
+
+        deliveryOption.forEach((option) => {
+            if(option.id === deliveryOptionId){
+                selectedOption = option;
+            }
+        });
+
+        let today = dayjs();
+        let deliveryDate = today.add(selectedOption.delay , 'days');
+        let dayString = deliveryDate.format('dddd , MMMM D');
+
         html += `
             <div class="product-in-cart product-num-${cartItem.productId}">
-                <h2>Delivery date : Saturday , September 14</h2>
+                <h2>Delivery date : ${dayString}</h2>
                 <div class="cart-product-flex">
                     <div class="cart-product-details">
                         <div class="cart-product-image">
@@ -51,41 +66,9 @@ function generateCartItems () {
     
                     <div class="cart-delivery-details">
                         <h3>Choose a delivery option</h3>
-                        <div class="delivery-date-selection">
-                            <input type="radio" name="radio-${cartItem.productId}" id="radio-${cartItem.productId}-option1">
-                            <label for="radio-${cartItem.productId}-option1">
-                                <div class="delivery-date">
-                                    Saturday , September 14
-                                </div>
-                                <div class="delivery-charge">
-                                    FREE Shipping
-                                </div>
-                            </label>
-                        </div>
-    
-                        <div class="delivery-date-selection">
-                            <input type="radio" name="radio-${cartItem.productId}" id="radio-${cartItem.productId}-option2">
-                            <label for="radio-${cartItem.productId}-option2">
-                                <div class="delivery-date">
-                                    Thursday , September 12
-                                </div>
-                                <div class="delivery-charge">
-                                    &#8377;50 - Shipping
-                                </div>
-                            </label>
-                        </div>
-    
-                        <div class="delivery-date-selection">
-                            <input type="radio" name="radio-${cartItem.productId}" id="radio-${cartItem.productId}-option3">
-                            <label for="radio-${cartItem.productId}-option3">
-                                <div class="delivery-date">
-                                    Tuesday , September 10
-                                </div>
-                                <div class="delivery-charge">
-                                    &#8377;100 - Shipping
-                                </div>
-                            </label>
-                        </div>
+                        
+                        ${generateDeliveryOptions(cartItem)}
+
                     </div>
                 </div>
             </div>
@@ -93,6 +76,36 @@ function generateCartItems () {
     })
 
     document.querySelector('.cart-body-left').innerHTML = html;
+}
+
+function generateDeliveryOptions (cartItem) {
+    let html = '';
+    deliveryOption.forEach((option) => {
+        let today = dayjs();
+        let deliveryDate = today.add(option.delay , 'days');
+        let dayString = deliveryDate.format('dddd , MMMM D');
+        let priceString = option.price;
+
+        priceString = priceString == 0 ? 'FREE' : `&#8377;${priceString} - `;
+
+        let isChecked = option.id === cartItem.deliveryOptionId;
+
+        html += `
+            <div class="delivery-date-selection">
+                <input type="radio" name="radio-${cartItem.productId}" id="radio-${cartItem.productId}-option-${option.id}"
+                ${isChecked ? "checked" : ""}>
+                <label for="radio-${cartItem.productId}-option-${option.id}">
+                    <div class="delivery-date">
+                        ${dayString}
+                    </div>
+                    <div class="delivery-charge">
+                        ${priceString} Shipping
+                    </div>
+                </label>
+            </div>
+        `;
+    });
+    return html;
 }
 
 function displayCartQuantity () {
