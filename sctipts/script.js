@@ -26,10 +26,43 @@ function generateProducts () {
                         <option value="10">10</option>
                     </select>
                 </div>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" data-product-Id="${product.id}">Add to Cart</button>
             </div>
         `;
     });
     document.querySelector('.products-container').innerHTML = procuctHtml;
+
+    document.querySelectorAll('.add-to-cart').forEach((button) => {
+        button.addEventListener('click' , () => {
+            addToCart(button);
+        });
+    });
 }
+
+function addToCart (button) {
+    let productId = button.dataset.productId;
+    let isInCart;
+
+    cart.forEach((cartItem) => {
+        if(productId === cartItem.productId){
+            isInCart = cartItem;
+        }
+    })
+    
+    if(isInCart){
+        isInCart.quantity += 1;
+    }
+    else{
+        cart.push(
+            {
+                productId : productId,
+                quantity : 1
+            }
+        )
+    }
+
+    console.log(cart);
+}
+
+
 
