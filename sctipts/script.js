@@ -74,10 +74,11 @@ function addToCart (button) {
 
     let addedPopup = document.querySelector(`.added-for-${productId}`);
     addedPopup.classList.add('visible');
+
     setTimeout(() => {
         addedPopup.classList.remove('visible');
     } , 1000);
-
+    
 }
 
 
