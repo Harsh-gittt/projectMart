@@ -49,8 +49,8 @@ function generateCartItems () {
                     <div class="cart-delivery-details">
                         <h3>Choose a delivery option</h3>
                         <div class="delivery-date-selection">
-                            <input type="radio" name="radio1" id="radio1-option1">
-                            <label for="radio1-option1">
+                            <input type="radio" name="radio-${cartItem.productId}" id="radio-${cartItem.productId}-option1">
+                            <label for="radio-${cartItem.productId}-option1">
                                 <div class="delivery-date">
                                     Saturday , September 14
                                 </div>
@@ -61,8 +61,8 @@ function generateCartItems () {
                         </div>
     
                         <div class="delivery-date-selection">
-                            <input type="radio" name="radio1" id="radio1-option2">
-                            <label for="radio1-option2">
+                            <input type="radio" name="radio-${cartItem.productId}" id="radio-${cartItem.productId}-option2">
+                            <label for="radio-${cartItem.productId}-option2">
                                 <div class="delivery-date">
                                     Thursday , September 12
                                 </div>
@@ -73,8 +73,8 @@ function generateCartItems () {
                         </div>
     
                         <div class="delivery-date-selection">
-                            <input type="radio" name="radio1" id="radio1-option3">
-                            <label for="radio1-option3">
+                            <input type="radio" name="radio-${cartItem.productId}" id="radio-${cartItem.productId}-option3">
+                            <label for="radio-${cartItem.productId}-option3">
                                 <div class="delivery-date">
                                     Tuesday , September 10
                                 </div>
@@ -91,3 +91,4 @@ function generateCartItems () {
 
     document.querySelector('.cart-body-left').innerHTML = html;
 }
+
