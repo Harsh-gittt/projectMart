@@ -1,0 +1,202 @@
+.cart-body{
+    width: 100%;
+    padding: 2vw 13vw;
+    background-color: #FAF9F6;
+}
+
+.cart-body h2{
+    font-size: 2vw;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 3vh;
+}
+
+.number-of-items{
+    color: cornflowerblue;
+}
+
+.cart-body-flex{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.cart-body-left{
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    width: 65%;
+}
+
+.product-in-cart{
+    width: 100%;
+    background-color: white;
+    padding: 2vw;
+    border: 1px solid #dadada;
+    border-radius: 5px;
+}
+
+.product-in-cart h2{
+    text-align: left;
+    font-size: 1.5vw;
+    color: orangered;
+}
+
+.cart-product-flex{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cart-product-details{
+    display: flex;
+    align-items: flex-start;
+    gap: 2vw;
+}
+
+.cart-product-image{
+    height: 20%;
+    width: 20%;
+}
+
+.cart-product-image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.cart-product-info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1vh;
+}
+
+.cart-product-name{
+    font-size: 1vw;
+    font-weight: 700;
+}
+
+.cart-product-price{
+    font-size: 0.9vw;
+    font-weight: 600;
+    color: red;
+}
+
+.cart-product-actions{
+    display: flex;
+    gap: 0.6vw;
+    font-size: 1vw;
+    font-weight: 400;
+}
+
+.cart-product-feature{
+    color: cornflowerblue;
+    cursor: pointer;
+}
+
+.cart-product-feature:hover{
+    color: orangered;
+}
+
+.cart-delivery-details{
+    width: 200%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.cart-delivery-details h3{
+    font-size: 1vw;
+    font-weight: 600;
+}
+
+.delivery-date-selection{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.delivery-date-selection label{
+    cursor: pointer;
+}
+
+.delivery-date-selection input{
+    height: 15px;
+    width: 15px;
+}
+
+.delivery-date{
+    font-size: 1.1vw;
+    color: cornflowerblue;
+}
+
+.delivery-charge{
+    font-size: 0.9vw;
+    color: lightslategray;
+}
+
+.cart-body-right{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #dadada;
+    background-color: white;
+    width: 30%;
+    position: relative;
+    min-height: 35vh;
+}
+
+.cart-body-right h2{
+    font-size: 1.1vw;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 2vh;
+}
+
+.order-details{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95vw;
+    margin-bottom: 1vh;
+}
+
+.tax{
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 1vh;
+}
+
+.shipping-cost{
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 1vh;
+}
+
+.order-total-text{
+    font-size: 1.2vw;
+    font-weight: 900;
+    color: cornflowerblue;
+    margin-bottom: 2vh;
+}
+
+.place-order-button{
+    margin: 1vh 0;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50% , 0);
+    background-color: orangered;
+    color: white;
+    height: 5vh;
+    width: 80%;
+    border: none;
+    border-radius: 15px;
+    font-size: 1vw;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
