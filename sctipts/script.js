@@ -26,6 +26,7 @@ function generateProducts () {
                         <option value="10">10</option>
                     </select>
                 </div>
+                <div class="added-for-${product.id} added-popup">✅ Added!</div>
                 <button class="add-to-cart" data-product-Id="${product.id}">Add to Cart</button>
             </div>
         `;
@@ -70,6 +71,12 @@ function addToCart (button) {
 
     let cartIcon = document.querySelector('.cart-number');
     cartIcon.innerHTML = cartQuantity;
+
+    let addedPopup = document.querySelector(`.added-for-${productId}`);
+    addedPopup.classList.add('visible');
+    setTimeout(() => {
+        addedPopup.classList.remove('visible');
+    } , 1000);
 
 }
 
