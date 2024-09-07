@@ -1,4 +1,4 @@
-import { cart } from "./cart-data.js";
+import { cart , removeFromCart } from "./cart-data.js";
 import { products } from "./products.js";
 
 generateCartItems();
@@ -17,7 +17,7 @@ function generateCartItems () {
         });
 
         html += `
-            <div class="product-in-cart">
+            <div class="product-in-cart product-num-${cartItem.productId}">
                 <h2>Delivery date : Saturday , September 14</h2>
                 <div class="cart-product-flex">
                     <div class="cart-product-details">
@@ -39,7 +39,7 @@ function generateCartItems () {
                                 <div class="cart-product-update cart-product-feature">
                                     Update
                                 </div>
-                                <div class="cart-product-delete cart-product-feature">
+                                <div class="cart-product-delete cart-product-feature" data-delete-Id="${cartItem.productId}">
                                     Delete
                                 </div>
                             </div>
@@ -91,4 +91,13 @@ function generateCartItems () {
 
     document.querySelector('.cart-body-left').innerHTML = html;
 }
+
+document.querySelectorAll('.cart-product-delete').forEach((button) => {
+    button.addEventListener('click', () => {
+        let productId = button.dataset.deleteId;
+        removeFromCart(productId);
+        let toDelete = document.querySelector(`.product-num-${productId}`);
+        toDelete.remove();
+    });
+});
 

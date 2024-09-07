@@ -2,6 +2,7 @@
     width: 100%;
     padding: 2vw 13vw;
     background-color: #FAF9F6;
+    min-height: 85vh;
 }
 
 .cart-body h2{
