@@ -1,6 +1,7 @@
-import {cart , insertIntoCart} from './cart-data.js';
+import {cart , insertIntoCart, updateCartQuantity} from './cart-data.js';
 import { products } from './products.js';
 
+displayCartQuantity();
 generateProducts();
 
 function generateProducts () {
@@ -43,14 +44,9 @@ function generateProducts () {
     });
 }
 
-function updateCartQuantity () {
-    let cartQuantity = 0;
-    cart.forEach((cartItem) => {
-        cartQuantity += cartItem.quantity;
-    });
-
+function displayCartQuantity () {
     let cartIcon = document.querySelector('.cart-number');
-    cartIcon.innerHTML = cartQuantity;
+    cartIcon.innerHTML = updateCartQuantity();
 }
 
 function addPopup (productId) {
@@ -66,7 +62,7 @@ function addToCart (button) {
     let productId = button.dataset.productId;
     insertIntoCart(productId);
     addPopup(productId);
-    updateCartQuantity();
+    displayCartQuantity();
 }
 
 

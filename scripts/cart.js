@@ -1,7 +1,8 @@
-import { cart , removeFromCart } from "./cart-data.js";
+import { cart , removeFromCart , updateCartQuantity} from "./cart-data.js";
 import { products } from "./products.js";
 
 generateCartItems();
+displayCartQuantity();
 
 function generateCartItems () {
     let html = '';
@@ -92,12 +93,21 @@ function generateCartItems () {
     document.querySelector('.cart-body-left').innerHTML = html;
 }
 
+function displayCartQuantity () {
+    let cartIcon = document.querySelector('.cart-number');
+    cartIcon.innerHTML = updateCartQuantity();
+
+    let checkOutItems = document.querySelector('.number-of-items');
+    checkOutItems.innerHTML = `${updateCartQuantity()} items`;
+}
+
 document.querySelectorAll('.cart-product-delete').forEach((button) => {
     button.addEventListener('click', () => {
         let productId = button.dataset.deleteId;
         removeFromCart(productId);
         let toDelete = document.querySelector(`.product-num-${productId}`);
         toDelete.remove();
+        displayCartQuantity();
     });
 });
 
