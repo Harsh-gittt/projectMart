@@ -13,7 +13,7 @@ function generateProducts () {
                 <div class="product-rating">${(product.rating).toFixed(1)}⭐</div>
                 <div class="product-price">&#8377;${product.price}</div>
                 <div class="product-quantity">
-                    <select name="product-quantity" id="pq${index + 1}">
+                    <select name="product-quantity" id="pq${index + 1}" class="select-items-${product.id}">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -48,15 +48,17 @@ function addToCart (button) {
             isInCart = cartItem;
         }
     })
+
+    let numOfItems = document.querySelector(`.select-items-${productId}`).value;
     
     if(isInCart){
-        isInCart.quantity += 1;
+        isInCart.quantity += Number(numOfItems);
     }
     else{
         cart.push(
             {
                 productId : productId,
-                quantity : 1
+                quantity : Number(numOfItems)
             }
         )
     }
@@ -69,7 +71,6 @@ function addToCart (button) {
     let cartIcon = document.querySelector('.cart-number');
     cartIcon.innerHTML = cartQuantity;
 
-    console.log(cart);
 }
 
 

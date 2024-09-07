@@ -195,6 +195,7 @@ html , body{
 .product .add-to-cart{
     position: absolute;
     left: 50%;
+    bottom: 20px;
     transform: translate(-50% , 0);
     margin-top: 15px;
     height: 9%;
