@@ -43,10 +43,9 @@
 }
 
 .cart-product-flex{
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    width: 100%;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3vw;
 }
 
 .cart-product-details{
@@ -56,14 +55,14 @@
 }
 
 .cart-product-image{
-    height: 20%;
-    width: 20%;
+    height: 70%;
+    width: 35%;
 }
 
 .cart-product-image img{
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
 }
 
