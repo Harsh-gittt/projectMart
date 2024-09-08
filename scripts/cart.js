@@ -3,6 +3,7 @@ import { products } from "./products.js";
 import { deliveryOption } from "./delivery-options.js";
 
 generateCartItems();
+generateOrderSummary();
 
 function generateCartItems () {
     displayCartQuantity();
@@ -78,6 +79,9 @@ function generateCartItems () {
 
     document.querySelector('.cart-body-left').innerHTML = html;
 
+    attachEventListeners();
+
+
     function generateDeliveryOptions (cartItem) {
         let htmlOptions = '';
         deliveryOption.forEach((option) => {
@@ -117,53 +121,143 @@ function generateCartItems () {
     
         let checkOutItems = document.querySelector('.number-of-items');
         checkOutItems.innerHTML = `${updateCartQuantity()} items`;
+
+        // let orderSummatyItems = document.querySelector('#items-cost');
+        // orderSummatyItems.innerHTML = updateCartQuantity();
     }
     
-    document.querySelectorAll('.cart-product-delete').forEach((button) => {
-        button.addEventListener('click', () => {
-            let productId = button.dataset.deleteId;
-            removeFromCart(productId);
-            let toDelete = document.querySelector(`.product-num-${productId}`);
-            toDelete.remove();
-            displayCartQuantity();
+    function attachEventListeners () {
+        document.querySelectorAll('.cart-product-delete').forEach((button) => {
+            button.addEventListener('click', () => {
+                let productId = button.dataset.deleteId;
+                removeFromCart(productId);
+                let toDelete = document.querySelector(`.product-num-${productId}`);
+                toDelete.remove();
+                displayCartQuantity();
+                generateOrderSummary();
+            });
         });
-    });
-    
-    document.querySelectorAll('.cart-product-update').forEach((button) => {
-        button.addEventListener('click', () => {
-            let productId = button.dataset.updateId;
-            let toUpdate = document.querySelector(`.product-num-${productId}`);
-            toUpdate.classList.add('is-editing-quantity');
+        
+        document.querySelectorAll('.cart-product-update').forEach((button) => {
+            button.addEventListener('click', () => {
+                let productId = button.dataset.updateId;
+                let toUpdate = document.querySelector(`.product-num-${productId}`);
+                toUpdate.classList.add('is-editing-quantity');
+            });
         });
-    });
-    
-    document.querySelectorAll('.save-quantity').forEach((button) => {
-        button.addEventListener('click', () => {
-            let productId = button.dataset.saveId;
-            let toSave = document.querySelector(`.product-num-${productId}`);
-            let newQuantity = document.querySelector(`.value-for-${productId}`).value;
-    
-            if(newQuantity > 0 && newQuantity <100){
-                toSave.classList.remove('is-editing-quantity');
-            updateToNewQuantity(productId , Number(newQuantity))
-            document.querySelector(`.quantity-for-${productId}`).innerHTML = `Quantity : ${newQuantity}`;
-            displayCartQuantity();
+        
+        document.querySelectorAll('.save-quantity').forEach((button) => {
+            button.addEventListener('click', () => {
+                let productId = button.dataset.saveId;
+                let toSave = document.querySelector(`.product-num-${productId}`);
+                let newQuantity = document.querySelector(`.value-for-${productId}`).value;
+        
+                if(newQuantity > 0 && newQuantity <100){
+                    toSave.classList.remove('is-editing-quantity');
+                updateToNewQuantity(productId , Number(newQuantity))
+                document.querySelector(`.quantity-for-${productId}`).innerHTML = `Quantity : ${newQuantity}`;
+                displayCartQuantity();
+                generateOrderSummary();
+                }
+        
+                else{
+                    alert('Invalid Quantity');
+                }
+                
+            });
+        });
+        
+        document.querySelectorAll('.delivery-date-selection').forEach((date) => {
+            date.addEventListener('click', () => {
+                let {productId, deliveryOptionId} = date.dataset;
+                updateDeliveryOption(productId , deliveryOptionId);
+                generateCartItems();
+                generateOrderSummary();
+            });
+        });
+    }
+
+}
+
+function generateOrderSummary () {
+    let itemsCost = 0;
+    let shippingCost = 0;
+
+    cart.forEach((cartItem) => {
+        let matchingProduct;
+        let matchingDeliveryOption;
+
+        products.forEach((product) => {
+            if(product.id === cartItem.productId){
+                matchingProduct = product;
             }
-    
-            else{
-                alert('Invalid Quantity');
+        });
+
+        itemsCost += matchingProduct.price * cartItem.quantity;
+
+        deliveryOption.forEach((option) => {
+            if(option.id === cartItem.deliveryOptionId){
+                matchingDeliveryOption = option;
             }
-            
         });
-    });
-    
-    document.querySelectorAll('.delivery-date-selection').forEach((date) => {
-        date.addEventListener('click', () => {
-            let {productId, deliveryOptionId} = date.dataset;
-            updateDeliveryOption(productId , deliveryOptionId);
-            generateCartItems();
-        });
+
+        shippingCost += matchingDeliveryOption.price;
     });
 
+    let costBeforeTax = itemsCost + shippingCost;
+    let tax = costBeforeTax * 0.1;
+    let totalCost = costBeforeTax + tax;
+
+    let orderSummaryHtml = `
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div class="order-details items">
+                <span>
+                    Items (<span id="total-items">${updateCartQuantity()}</span>) :
+                </span>
+                <span class="items-cost">
+                    &#8377;${itemsCost.toFixed(2)}
+                </span>
+            </div>
+
+            <div class="order-details shipping">
+                <span>Shipping & handling :</span>
+                <span class="shipping-cost">
+                    &#8377;${shippingCost.toFixed(2)}
+                </span>
+            </div>
+
+            <div class="order-details before-tax">
+                <span>Total before tax :</span>
+                <span class="before-tax-cost">
+                    &#8377;${costBeforeTax.toFixed(2)}
+                </span>
+            </div>
+
+            <div class="order-details tax">
+                <span>
+                    Estimated tax (10%) :
+                </span>
+                <span class="tax-cost">
+                    &#8377;${tax.toFixed(2)}
+                </span>
+            </div>
+        </div>
+
+        <div class="order-total">
+            <div class="order-details order-total-text">
+                <span>Order total :</span>
+                <span class="total-cost">
+                    &#8377;${totalCost.toFixed(2)}
+                </span>
+            </div>
+
+            <button class="place-order-button">
+                Place your order
+            </button>
+        </div>
+    `;
+
+    document.querySelector('.cart-body-right').innerHTML = orderSummaryHtml;
 }
 
