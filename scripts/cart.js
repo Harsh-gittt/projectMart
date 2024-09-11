@@ -1,6 +1,7 @@
-import { cart , removeFromCart , updateCartQuantity , updateDeliveryOption, updateToNewQuantity} from "./cart-data.js";
+import { cart , emptyCart, removeFromCart , updateCartQuantity , updateDeliveryOption, updateToNewQuantity} from "./cart-data.js";
 import { products } from "./products.js";
 import { deliveryOption } from "./delivery-options.js";
+import { createOrder } from "./order-data.js";
 
 generateCartItems();
 generateOrderSummary();
@@ -259,5 +260,12 @@ function generateOrderSummary () {
     `;
 
     document.querySelector('.cart-body-right').innerHTML = orderSummaryHtml;
+
+    document.querySelector('.place-order-button').addEventListener('click' , () => {
+        createOrder(cart , products , deliveryOption);
+        emptyCart();
+        generateCartItems();
+        generateOrderSummary();
+    });
 }
 
