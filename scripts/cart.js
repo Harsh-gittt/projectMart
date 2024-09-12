@@ -262,10 +262,13 @@ function generateOrderSummary () {
     document.querySelector('.cart-body-right').innerHTML = orderSummaryHtml;
 
     document.querySelector('.place-order-button').addEventListener('click' , () => {
-        createOrder(cart , products , deliveryOption);
-        emptyCart();
-        generateCartItems();
-        generateOrderSummary();
+        if(cart.length){
+            createOrder(cart , products , deliveryOption);
+            emptyCart();
+            displayCartQuantity();
+            generateCartItems();
+            generateOrderSummary();
+        }
     });
 }
 

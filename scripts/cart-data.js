@@ -4,7 +4,7 @@ function saveToStorage () {
     localStorage.setItem('savedCart' , JSON.stringify(cart));
 }
 
-export function insertIntoCart (productId) {
+export function insertIntoCart (productId , numOfItems) {
     let isInCart;
 
     cart.forEach((cartItem) => {
@@ -13,7 +13,7 @@ export function insertIntoCart (productId) {
         }
     });
 
-    let numOfItems = document.querySelector(`.select-items-${productId}`).value;
+    // let numOfItems = document.querySelector(`.select-items-${productId}`).value;
     
     if(isInCart){
         isInCart.quantity += Number(numOfItems);

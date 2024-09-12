@@ -60,7 +60,8 @@ function addPopup (productId) {
 
 function addToCart (button) {
     let productId = button.dataset.productId;
-    insertIntoCart(productId);
+    let numOfItems = document.querySelector(`.select-items-${productId}`).value;
+    insertIntoCart(productId , numOfItems);
     addPopup(productId);
     displayCartQuantity();
 }

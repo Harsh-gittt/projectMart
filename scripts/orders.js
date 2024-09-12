@@ -1,7 +1,10 @@
-import { orders } from "./order-data";
+import { insertIntoCart, updateCartQuantity } from "./cart-data.js";
+import { orders } from "./order-data.js";
 
-function generateOrdersHtml () {
-    let html = ''
+function generateOrdersHtml() {
+    let cartIcon = document.querySelector('.cart-number');
+    cartIcon.innerHTML = updateCartQuantity();
+    let html = '<h2>Your Orders</h2>';
 
     orders.forEach((singleOrder) => {
         html += `
@@ -9,76 +12,69 @@ function generateOrdersHtml () {
                 <div class="order-details">
                     <div class="order-details-right">
                         <div class="order-info">
-                            <p class="text1">
-                                Order Placed:
-                            </p>
-                            <p class="text2">
-                                ${singleOrder.orderPlaceDate}
-                            </p>
+                            <p class="text1">Order Placed:</p>
+                            <p class="text2">${singleOrder.orderPlacedDate}</p>
                         </div>
                         <div class="order-info">
-                            <p class="text1">
-                                Total:
-                            </p>
-                            <p class="text2">
-                                &#8377;${singleOrder.totalOrderCost}
-                            </p>
+                            <p class="text1">Total:</p>
+                            <p class="text2">&#8377;${singleOrder.totalOrderCost}</p>
                         </div>
                     </div>
                     <div class="order-details-left">
                         <div class="order-info">
-                            <p class="text1">
-                                Order ID:
-                            </p>
-                            <p class="text2">
-                                ${singleOrder.orderId}
-                            </p>
+                            <p class="text1">Order ID:</p>
+                            <p class="text2">${singleOrder.orderId}</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="item-details">
-                    ${generateOneItem()}
+                    ${generateOneItem(singleOrder.orderedProducts)}
                 </div>
             </div>
-        `
+        `;
+    });
 
-        function generateOneItem () {
-            let oneHtml = '';
-            singleOrder.orderedProducts.forEach((product) => {
-                oneHtml += `
-                    <div class="one-item">
-                        <div class="left">
-                            <div class="item-image">
-                                <img src="${product.productImage}" alt="">
-                            </div>
-                            <div class="item-info">
-                                <div class="item-name">
-                                    ${product.productName}
-                                </div>
-                                <div class="item-delivery-date">
-                                    Arriving on: ${product.deliveryDate}
-                                </div>
-                                <div class="item-quantity">
-                                    Quantity: ${product.quantity}
-                                </div>
-                                <button class="order-again">
-                                    <i class="ri-loop-left-line"></i>
-                                    Buy it again
-                                </button>
-                            </div>
+    document.querySelector('.orders-body').innerHTML = html;
+
+    // Now define the helper function
+    function generateOneItem(orderedProducts) {
+        let oneHtml = '';
+        orderedProducts.forEach((product) => {
+            oneHtml += `
+                <div class="one-item">
+                    <div class="left">
+                        <div class="item-image">
+                            <img src="${product.productImage}" alt="">
                         </div>
-                        <div class="right">
-                            <button class="track-package">
-                                Track package
+                        <div class="item-info">
+                            <div class="item-name">${product.productName}</div>
+                            <div class="item-delivery-date">Arriving on: ${product.deliveryDate}</div>
+                            <div class="item-quantity">Quantity: ${product.quantity}</div>
+                            <button class="order-again" data-product-Id="${product.productId}">
+                                <i class="ri-loop-left-line"></i> Buy it again
                             </button>
                         </div>
                     </div>
-                `
-            })
-        }
-    })
+                    <div class="right">
+                        <button class="track-package" data-product-Id="${product.productId}">Track package</button>
+                    </div>
+                </div>
+            `;
+        });
+        return oneHtml; // Return the generated HTML for one item
+    }
 
-    document.querySelector('.orders-body').innerHTML = html;
+    document.querySelectorAll('.order-again').forEach((orderAgainButton) => {
+        orderAgainButton.addEventListener('click' , () => {
+            let productId = orderAgainButton.dataset.productId;
+            insertIntoCart(productId , 1);
+            let cartIcon = document.querySelector('.cart-number');
+            cartIcon.innerHTML = updateCartQuantity();
+        });
+    });
+
 }
 
+// Call the function to generate the orders HTML
+generateOrdersHtml();
