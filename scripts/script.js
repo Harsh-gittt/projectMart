@@ -4,6 +4,7 @@ import { products } from './products.js';
 displayCartQuantity();
 generateProducts();
 
+// function to generate product cards 
 function generateProducts () {
     let procuctHtml = '';
 
@@ -44,20 +45,24 @@ function generateProducts () {
     });
 }
 
+// function to display cart quantity in nav bar 
 function displayCartQuantity () {
     let cartIcon = document.querySelector('.cart-number');
     cartIcon.innerHTML = updateCartQuantity();
 }
 
+
 function addPopup (productId) {
     let addedPopup = document.querySelector(`.added-for-${productId}`);
     addedPopup.classList.add('visible');
 
+    // removes popup after 1000 ms 
     setTimeout(() => {
         addedPopup.classList.remove('visible');
     } , 1000);
 }
 
+// adds products to cart 
 function addToCart (button) {
     let productId = button.dataset.productId;
     let numOfItems = document.querySelector(`.select-items-${productId}`).value;

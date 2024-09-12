@@ -1,9 +1,13 @@
 import { insertIntoCart, updateCartQuantity } from "./cart-data.js";
 import { orders } from "./order-data.js";
 
+// generates a single order block 
 function generateOrdersHtml() {
+
+    // updates cart icon in nav bar 
     let cartIcon = document.querySelector('.cart-number');
     cartIcon.innerHTML = updateCartQuantity();
+
     let html = '<h2>Your Orders</h2>';
 
     orders.forEach((singleOrder) => {
@@ -37,7 +41,7 @@ function generateOrdersHtml() {
 
     document.querySelector('.orders-body').innerHTML = html;
 
-    // Now define the helper function
+    // generates one item in one order block
     function generateOneItem(orderedProducts) {
         let oneHtml = '';
         orderedProducts.forEach((product) => {
@@ -76,5 +80,4 @@ function generateOrdersHtml() {
 
 }
 
-// Call the function to generate the orders HTML
 generateOrdersHtml();

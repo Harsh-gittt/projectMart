@@ -1,9 +1,11 @@
 export let cart = JSON.parse(localStorage.getItem('savedCart')) || [];
 
+// saves cart to localStorage
 function saveToStorage () {
     localStorage.setItem('savedCart' , JSON.stringify(cart));
 }
 
+// inserts product into cart 
 export function insertIntoCart (productId , numOfItems) {
     let isInCart;
 
@@ -12,8 +14,6 @@ export function insertIntoCart (productId , numOfItems) {
             isInCart = cartItem;
         }
     });
-
-    // let numOfItems = document.querySelector(`.select-items-${productId}`).value;
     
     if(isInCart){
         isInCart.quantity += Number(numOfItems);
@@ -31,6 +31,7 @@ export function insertIntoCart (productId , numOfItems) {
     saveToStorage();
 }
 
+// creates a new cart and copies all cart items into it except deleted item 
 export function removeFromCart (productId) {
     let newCart = [];
 
@@ -52,6 +53,7 @@ export function updateCartQuantity () {
     return cartQuantity;
 }
 
+// updates cart quantity on clicking 'update' button 
 export function updateToNewQuantity (productId , newQuantity) {
     cart.forEach((cartItem) => {
         if(productId === cartItem.productId){
