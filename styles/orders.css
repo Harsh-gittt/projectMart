@@ -5,7 +5,7 @@
     align-items: center;
     padding: 2vw;
     background-color: #FAF9F6;
-    min-height: 87vh;
+    min-height: calc(100vh - 100px);
 }
 
 .orders-body h2{
@@ -47,7 +47,7 @@
 .item-details{
     display: flex;
     flex-direction: column;
-    gap: 4vw;
+    gap: 1em;
     padding: 1.5vw;
 }
 
@@ -76,18 +76,17 @@
 .item-info .item-name{
     font-size: 1vw;
     font-weight: 600;
-    margin-bottom: 1vh;
+    margin-bottom: 0.5em;
 }
 
 .item-info .item-delivery-date , .item-info .item-quantity{
     font-size: 1vw;
-    margin-bottom: 1vh;
+    margin-bottom: 0.5em;
 }
 
 .order-again{
-    margin-top: 2vh;
-    height: 2.5vw;
-    width: 10vw;
+    height: 3em;
+    width: 10em;
     border: none;
     border-radius: 15px;
     color: white;
@@ -97,15 +96,76 @@
     cursor: pointer;
 }
 
-.right .track-package{
-    height: 3vw;
-    width: 15vw;
-    background-color: white;
-    border: 2px solid #dadada;
-    border-radius: 15px;
-    color: cornflowerblue;
-    font-size: 1.1vw;
-    font-weight: 600;
-    cursor: pointer;
+@media (max-width : 900px) {
+    .orders-body{
+        min-height: calc(100vh - 80px);
+        padding: 4vw;
+    }
+    .orders-body>h2{
+        font-size: 3.5vw;
+    }
+    .order-block{
+        width: 80%;
+    }
+    .order-info .text1{
+        font-size: 1.5vw;
+    }
+    .order-info .text2{
+        font-size: 1.2vw;
+    }
+    .item-image{
+        width: 25%;
+    }
+    .item-info .item-name{
+        font-size: 1.6vw;
+    }
+    .item-info .item-delivery-date , .item-info .item-quantity{
+        font-size: 1.5vw;
+    }
+    .order-again{
+        font-size: 1.5vw;
+    }
+}
+
+@media (max-width : 500px) {
+    .orders-body{
+        min-height: calc(100vh - 60px);
+        padding: 5vw;
+    }
+    .orders-body>h2{
+        font-size: 5vw;
+    }
+    .order-block{
+        width: 90%;
+    }
+    .order-details{
+        padding: 3vw;
+    }
+    .order-info .text1{
+        font-size: 2.5vw;
+    }
+    .order-info .text2{
+        font-size: 2.1vw;
+    }
+    .item-details{
+        gap: 1.5em;
+    }
+    .one-item{
+        padding: 1vw 3vw;
+        flex-direction: column;
+        gap: 0.2em;
+    }
+    .item-image{
+        width: 30%;
+    }
+    .item-info .item-name{
+        font-size: 3vw;
+    }
+    .item-info .item-delivery-date , .item-info .item-quantity{
+        font-size: 2.7vw;
+    }
+    .order-again{
+        font-size: 2.7vw;
+    }
 }
 

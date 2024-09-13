@@ -55,13 +55,13 @@ function generateOrdersHtml() {
                             <div class="item-name">${product.productName}</div>
                             <div class="item-delivery-date">Arriving on: ${product.deliveryDate}</div>
                             <div class="item-quantity">Quantity: ${product.quantity}</div>
-                            <button class="order-again" data-product-Id="${product.productId}">
-                                <i class="ri-loop-left-line"></i> Buy it again
-                            </button>
+                            
                         </div>
                     </div>
                     <div class="right">
-                        <button class="track-package" data-product-Id="${product.productId}">Track package</button>
+                        <button class="order-again" data-product-Id="${product.productId}">
+                            <i class="ri-loop-left-line"></i> Buy it again
+                        </button>
                     </div>
                 </div>
             `;
