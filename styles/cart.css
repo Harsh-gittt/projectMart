@@ -1,15 +1,15 @@
 .cart-body{
     width: 100%;
-    padding: 2vw 11vw;
+    padding: 2vw 10vw;
     background-color: #FAF9F6;
-    min-height: 85vh;
+    min-height: calc(100vh - 100px);
 }
 
 .cart-body h2{
     font-size: 2vw;
     font-weight: 600;
     text-align: center;
-    margin-bottom: 3vh;
+    margin-bottom: 1.7em;
 }
 
 .number-of-items{
@@ -25,12 +25,13 @@
 .cart-body-left{
     display: flex;
     flex-direction: column;
-    gap: 3vh;
+    gap: 2em;
     width: 70%;
 }
 
 .product-in-cart{
     width: 100%;
+    height: fit-content;
     background-color: white;
     padding: 2vw;
     border: 1px solid #dadada;
@@ -44,12 +45,13 @@
 }
 
 .cart-product-flex{
-    display: grid;
-    grid-template-columns: 1.6fr 0.7fr;
-    gap: 2vw;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .cart-product-details{
+    width: 50%;
     display: flex;
     align-items: flex-start;
     gap: 1vw;
@@ -64,23 +66,23 @@
     height: 100%;
     width: 100%;
     object-fit: contain;
-    object-position: center;
+    object-position: top;
 }
 
 .cart-product-info{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1vh;
+    gap: 0.7em;
 }
 
 .cart-product-name{
-    font-size: 1vw;
+    font-size: 1.15vw;
     font-weight: 700;
 }
 
 .cart-product-price{
-    font-size: 0.9vw;
+    font-size: 1vw;
     font-weight: 600;
     color: red;
 }
@@ -88,17 +90,17 @@
 .cart-product-actions{
     display: flex;
     align-items: center;
-    gap: 0.5vw;
+    gap: 1vw;
     font-size: 1vw;
     font-weight: 400;
 }
 
 .cart-product-actions .quantity-input{
-    width: 30px;
+    width: 3em;
     outline: none;
     border-radius: 5px;
     border: 1px solid #dadada;
-    font-size: 1vw;
+    font-size: 0.9vw;
     font-weight: 400;
     padding: 5px;
 }
@@ -125,16 +127,15 @@
 }
 
 .cart-delivery-details{
-    width: 200%;
     display: flex;
     flex-direction: column;
-    gap: 1.5vh;
+    gap: 1em;
     justify-content: flex-start;
     align-items: flex-start;
 }
 
 .cart-delivery-details h3{
-    font-size: 1vw;
+    font-size: 1.15vw;
     font-weight: 600;
 }
 
@@ -167,53 +168,51 @@
 .cart-body-right{
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 1.3vw;
     border: 1px solid #dadada;
     background-color: white;
     width: 25%;
     position: relative;
-    min-height: 35vh;
+    height: fit-content;
 }
 
 .cart-body-right h2{
-    font-size: 1.1vw;
+    font-size: 1.2vw;
     font-weight: 600;
     text-align: left;
-    margin-bottom: 2vh;
+    margin-bottom: 1em;
 }
 
 .order-details{
     display: flex;
     justify-content: space-between;
     font-size: 0.95vw;
-    margin-bottom: 1vh;
+    margin-bottom: 0.7em;
 }
 
-.tax{
+.tax , .shipping-cost{
     border-bottom: 1px solid #dadada;
-    padding-bottom: 1vh;
+    padding-bottom: 0.7em;
 }
 
-.shipping-cost{
-    border-bottom: 1px solid #dadada;
-    padding-bottom: 1vh;
+.order-total{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .order-total-text{
     font-size: 1.2vw;
     font-weight: 900;
     color: cornflowerblue;
-    margin-bottom: 2vh;
+    margin-bottom: 1em;
 }
 
 .place-order-button{
-    margin: 1vh 0;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50% , 0);
+    margin: auto;
     background-color: orangered;
     color: white;
-    height: 5vh;
+    height: 2.6em;
     width: 80%;
     border: none;
     border-radius: 15px;
@@ -223,3 +222,145 @@
 }
 
 
+@media (max-width : 900px) {
+    .cart-body{
+        min-height: calc(100vh - 80px);
+        padding: 3vw 6vw;
+    }
+    .cart-body>h2{
+        font-size: 3vw;
+    }
+    .cart-body-left{
+        width: 60%;
+    }
+    .product-in-cart>h2{
+        font-size: 2.1vw;
+    }
+    .cart-product-flex{
+        justify-content: space-evenly;
+    }
+    .cart-product-details{
+        flex-direction: column;
+        width: 50%;
+        gap: 1em;
+    }
+    .cart-product-image{
+        width: 70%;
+        height: 50%;
+    }
+    .cart-product-image img{
+        object-position: left;
+    }
+    .cart-product-info{
+        gap: 0.4em;
+    }
+    .cart-product-name{
+        font-size: 1.5vw;
+    }
+    .cart-product-price{
+        font-size: 1.4vw;
+    }
+    .cart-product-actions{
+        font-size: 1.4vw;
+    }
+    .cart-product-actions .quantity-input{
+        font-size: 1.3vw;
+    }
+
+    .cart-delivery-details h3{
+        font-size: 1.5vw;
+    }
+    .delivery-date{
+        font-size: 1.4vw;
+        font-weight: 600;
+    }
+    .delivery-charge{
+        font-size: 1.2vw;
+    }
+
+
+    .cart-body-right{
+        width: 36%;
+        padding: 1.5vw;
+    }
+    .cart-body-right h2{
+        font-size: 1.9vw;
+    }
+    .order-details{
+        font-size: 1.5vw;
+    }
+    .order-total-text{
+        font-size: 1.9vw;
+    }
+    .place-order-button{
+        height: 3.2em;
+        font-size: 1.5vw;
+    }
+}
+
+@media (max-width : 500px) {
+    .cart-body{
+        min-height: calc(100vh - 60px);
+        padding: 6vw 6vw;
+    }
+    .cart-body>h2{
+        font-size: 4.5vw;
+    }
+    .cart-body-flex{
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 2em;
+    }
+    .cart-body-left{
+        width: 100%;
+    }
+    .product-in-cart{
+        padding: 4vw;
+    }
+    .product-in-cart>h2{
+        font-size: 3.7vw;
+    }
+    .cart-product-image{
+        height: 45%;
+    }
+    .cart-product-name{
+        font-size: 3vw;
+    }
+    .cart-product-price{
+        font-size: 2.8vw;
+    }
+    .cart-product-actions{
+        font-size: 2.8vw;
+    }
+    .cart-product-actions .quantity-input{
+        font-size: 2.5vw;
+    }
+
+    .cart-delivery-details h3{
+        font-size: 3vw;
+    }
+    .delivery-date{
+        font-size: 2.8vw;
+    }
+    .delivery-charge{
+        font-size: 2.4vw;
+    }
+
+
+    .cart-body-right{
+        width: 100%;
+        padding: 4vw;
+    }
+    .cart-body-right h2{
+        font-size: 4vw;
+    }
+    .order-details{
+        font-size: 3.3vw;
+    }
+    .order-total-text{
+        font-size: 4vw;
+    }
+    .place-order-button{
+        font-size: 3.5vw;
+    }
+}
